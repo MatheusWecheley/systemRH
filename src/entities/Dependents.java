@@ -4,15 +4,15 @@ import entities.controllers.enums.Dependecy;
 
 import java.util.Date;
 
-public class Dependents {
-    private String name;
-    private Date birthDate;
-    private Dependecy dependecy;
+public class Dependents extends Employee{
+    protected String name;
+    protected String birthDate;
+    protected Dependecy modelDependecy;
 
     public Dependents() {
     }
 
-    public Dependents(String name, Date birthDate) {
+    public Dependents(String name, String birthDate) {
         this.name = name;
         this.birthDate = birthDate;
     }
@@ -25,19 +25,22 @@ public class Dependents {
         this.name = name;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Dependecy getDependecy() {
-        return dependecy;
+    public Dependecy getModelDependecy() {
+        return modelDependecy;
     }
 
-    public void setDependecy(Dependecy dependecy) {
-        this.dependecy = dependecy;
+    public void setModelDependecy(Dependecy modelDependecy) {
+        this.modelDependecy = modelDependecy;
     }
+
+
+
 }

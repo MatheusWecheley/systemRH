@@ -9,10 +9,9 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String CPF;
-    private Date hire_date;
+    private String hire_date;
     private double salary;
     private int registration;
-
     private Dependents dependents;
     private Role role;
 
@@ -38,11 +37,11 @@ public class Employee {
         this.CPF = CPF;
     }
 
-    public Date getHire_date() {
+    public String getHire_date() {
         return hire_date;
     }
 
-    public void setHire_date(Date hire_date) {
+    public void setHire_date(String hire_date) {
         this.hire_date = hire_date;
     }
 
@@ -76,5 +75,12 @@ public class Employee {
 
     public void setCargo(Role role) {
         this.role = role;
+    }
+
+    public String toString() {
+        return firstName + "\n"
+                + lastName + "\n"
+                + hire_date + "\n"
+                + salary;
     }
 }

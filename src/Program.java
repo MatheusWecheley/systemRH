@@ -2,18 +2,32 @@ import entities.controllers.ICreateEmployee;
 import entities.controllers.implementation.CreateEmployeeImplementation;
 
 import javax.swing.*;
-import java.util.Date;
 
 public class Program {
     public static void main(String[] args) {
-        String firstName = JOptionPane.showInputDialog("Please, enter the employee's name: ");
-        String lastName = JOptionPane.showInputDialog("Please, enter the employee's last name: ");
-        String CPF = JOptionPane.showInputDialog("Enter CPF: ");
-        Date hire_date = new Date();
-        double salary = 2000.00;
+        int operation;
+        String[] choises = {"Create Employee", "Generate Payroll", "Cancel"};
+        ICreateEmployee addEmployee = new CreateEmployeeImplementation();
 
-        ICreateEmployee employee = new CreateEmployeeImplementation();
+        operation = 5;
 
-        employee.createEmployee(firstName, lastName, CPF, hire_date, salary);
+        while (operation == 5) {
+
+            operation = JOptionPane.showOptionDialog(
+                    null
+                    , "Choose the desired operation:"
+                    , "Options"
+                    , JOptionPane.YES_NO_CANCEL_OPTION
+                    , JOptionPane.QUESTION_MESSAGE
+                    , null
+                    , choises
+                    , "Create Employee");
+
+            if (operation == 0) {
+                addEmployee.createEmployee();
+            } else {
+                break;
+            }
+        }
     }
 }
