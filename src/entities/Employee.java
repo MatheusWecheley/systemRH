@@ -3,8 +3,6 @@ package entities;
 
 import entities.controllers.enums.Role;
 
-import java.util.Date;
-
 public class Employee {
     private String firstName;
     private String lastName;
@@ -14,8 +12,15 @@ public class Employee {
     private int registration;
     private Dependents dependents;
     private Role role;
+    private String department;
 
+    public String getDepartment() {
+        return department;
+    }
 
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -81,6 +86,8 @@ public class Employee {
         return firstName + "\n"
                 + lastName + "\n"
                 + hire_date + "\n"
-                + salary;
+                + salary + "\n"
+                + role + "\n"
+                + registration + "\n";
     }
 }

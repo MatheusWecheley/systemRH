@@ -14,22 +14,31 @@ public class CreateDependencyImplementation implements ICreateDependents {
     String name;
     String birthDate;
     Dependecy dependecy;
-    List<Dependecy> dependecyList = new ArrayList<>();
+    List<Dependents> dependentsList = new ArrayList<>();
 
     public void createDependency(){
-        name = JOptionPane.showInputDialog(null, "Enter dependent name: ");
-        birthDate = JOptionPane.showInputDialog(null, "Enter dependent birth date: ");
-        dependecy = Dependecy.valueOf(
-                JOptionPane.showInputDialog(null, "What is the degree of dependency?"));
 
-        Dependents dependents = new Dependents();
+        if(dependentsList.size() <= 1) {
+            name = JOptionPane.showInputDialog(null, "Enter dependent name: ");
+            birthDate = JOptionPane.showInputDialog(null, "Enter dependent birth date: ");
+            dependecy = Dependecy.valueOf(
+                    JOptionPane.showInputDialog(null, "What is the degree of dependency?"));
 
-        dependents.setName(name);
-        dependents.setBirthDate(birthDate);
-        dependents.setModelDependecy(dependecy);
+            Dependents dependents = new Dependents();
 
-        if(dependecyList.size() <= 2) {
-            dependecyList.add(dependecy);
+            dependents.setName(name);
+            dependents.setBirthDate(birthDate);
+            dependents.setModelDependecy(dependecy);
+
+            dependentsList.add(dependents);
+
+            JOptionPane.showMessageDialog(null
+                    ,"Create Dependents \n" +
+                            dependents.getName() +
+                            "\n" +
+                            dependents.getBirthDate() +
+                            "\n" +
+                            dependents.getModelDependecy());
         } else {
             JOptionPane.showMessageDialog(
                                 null
@@ -37,15 +46,6 @@ public class CreateDependencyImplementation implements ICreateDependents {
                                 , "Error add another dependents",
                                 JOptionPane.ERROR_MESSAGE);
         }
-
-        JOptionPane.showMessageDialog(null
-        ,"Create Dependents \n" +
-                dependents.getName() +
-                "\n" +
-                dependents.getBirthDate() +
-                "\n" +
-                dependents.getModelDependecy());
-
     }
 
 }
