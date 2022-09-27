@@ -24,9 +24,8 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
     List<Employee> employeeList = new ArrayList<>();
 
     @Override
-    public void createEmployee() {
+    public void createEmployee(int id) {
 
-        int id = 0;
         String[] choises = {"management", "agency", "P&D"};
 
         firstName = JOptionPane.showInputDialog("Enter first Name the Employee's: ");
@@ -34,8 +33,8 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
         CPF = JOptionPane.showInputDialog("Enter CPF the Employee's: ");
         hire_date = JOptionPane.showInputDialog("Enter hire date the Employee: ");
         salary = Double.parseDouble(JOptionPane.showInputDialog("Enter salary the Employee's"));
-        role = Role.valueOf(JOptionPane.showInputDialog("Which is the employee's job?"));
-        String validate = String.valueOf(JOptionPane.showOptionDialog(
+        role = Role.valueOf(JOptionPane.showInputDialog("Which is the employee's job?").toUpperCase());
+        int validate = (JOptionPane.showOptionDialog(
                 null
                 , "Choose the departament:"
                 , "Options"
@@ -45,11 +44,8 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
                 , choises
                 , null));
 
-
         Employee employee = new Employee();
         ICreateDependents createDependents = new CreateDependencyImplementation();
-        id++;
-
 
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
@@ -58,10 +54,9 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
         employee.setSalary(salary);
         employee.setCargo(role);
         employee.setRegistration(id);
-        employee.setDepartment(validate);
 
         employeeList.add(employee);
-        JOptionPane.showConfirmDialog(null, employee);
+        JOptionPane.showMessageDialog(null,employee);
 
         int response = 0;
 
@@ -76,7 +71,7 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
             );
             if(response == 0 ) {
                 createDependents.createDependency();
-            } else {
+            } else if(response == 1) {
                 break;
             }
         }

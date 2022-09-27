@@ -22,7 +22,9 @@ public class CreateDependencyImplementation implements ICreateDependents {
             name = JOptionPane.showInputDialog(null, "Enter dependent name: ");
             birthDate = JOptionPane.showInputDialog(null, "Enter dependent birth date: ");
             dependecy = Dependecy.valueOf(
-                    JOptionPane.showInputDialog(null, "What is the degree of dependency?"));
+                    (JOptionPane.showInputDialog(null, "What is the degree of dependency?")).toUpperCase());
+
+
 
             Dependents dependents = new Dependents();
 

@@ -83,11 +83,11 @@ public class Employee {
     }
 
     public String toString() {
-        return firstName + "\n"
-                + lastName + "\n"
-                + hire_date + "\n"
-                + salary + "\n"
-                + role + "\n"
-                + registration + "\n";
+        return  "First Name: " + firstName + "\n"
+                + "Last Name: " + lastName + "\n"
+                + "Hire Date: " + hire_date + "\n"
+                + "Salary: " + salary + "\n"
+                + "Position: " + role + "\n"
+                + "ID Register: " + registration + "\n";
     }
 }

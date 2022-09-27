@@ -1,5 +1,5 @@
 package entities.controllers;
 
 public interface ICreateEmployee {
-    void createEmployee();
+    void createEmployee(int id);
 }
