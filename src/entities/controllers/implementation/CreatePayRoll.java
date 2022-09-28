@@ -2,15 +2,17 @@ package entities.controllers.implementation;
 
 import entities.Department;
 import entities.Employee;
+import entities.controllers.ICreateEmployee;
 import entities.controllers.IPayroll;
 
 import javax.swing.*;
+import java.util.List;
 
 public class CreatePayRoll implements IPayroll {
     Employee employee;
     Department department;
     String company;
-    CreateEmployeeImplementation createEmployeeImplementation;
+    ICreateEmployee createEmployeeImplementation = new CreateEmployeeImplementation();
 
     public CreatePayRoll() {
     }
@@ -19,11 +21,15 @@ public class CreatePayRoll implements IPayroll {
         this.employee = employee;
     }
 
-    public void calculateTotalValue() {
-        int id = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the Employee ID:"));
+    public void calculateTotalValue(int verifyId) {
+        List<Employee> employeeList = createEmployeeImplementation.getEmployeeList();
+        Integer result = createEmployeeImplementation.verifyID(employeeList, verifyId);
+        if(result == null) {
+            JOptionPane.showMessageDialog(null, "Employee not found!");
+        } else {
+            JOptionPane.showConfirmDialog(null, result);
+        }
 
-        Integer result = createEmployeeImplementation.verifyID(createEmployeeImplementation.employeeList, id);
-        JOptionPane.showMessageDialog(null, result);
     }
 
 }

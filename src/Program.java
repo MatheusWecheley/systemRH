@@ -1,9 +1,11 @@
+import entities.Employee;
 import entities.controllers.ICreateEmployee;
 import entities.controllers.IPayroll;
 import entities.controllers.implementation.CreateEmployeeImplementation;
 import entities.controllers.implementation.CreatePayRoll;
 
 import javax.swing.*;
+import java.util.List;
 
 public class Program {
     public static void main(String[] args) {
@@ -27,10 +29,11 @@ public class Program {
                     , "Create Employee");
 
             if (result == 0) {
-                id++;
-                addEmployee.createEmployee(id);
+                addEmployee.createEmployee();
             } else if(result == 1) {
-                payroll.calculateTotalValue();
+                int verifyId = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the Employee ID:"));
+                List<Employee> s = addEmployee.getEmployeeList();
+                JOptionPane.showMessageDialog(null,s);
             }
             else {
                 break;

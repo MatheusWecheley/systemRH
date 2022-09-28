@@ -19,12 +19,13 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
     String CPF;
     String hire_date;
     double salary;
+    int id = 1;
     Role role;
     Department department;
     List<Employee> employeeList = new ArrayList<>();
 
     @Override
-    public void createEmployee(int id) {
+    public void createEmployee() {
 
         String[] choises = {"management", "agency", "P&D"};
 
@@ -76,12 +77,16 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
             }
         }
     }
-    public Integer verifyID(List<Employee> employeeList, int id) {
-        for (int i = 0; i < employeeList.size(); i++) {
-            if(employeeList.get(i).getRegistration() == id) {
+    public Integer verifyID(List<Employee> list, int id) {
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getRegistration() == id) {
                 return i;
             }
         }
         return null;
+    }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
     }
 }

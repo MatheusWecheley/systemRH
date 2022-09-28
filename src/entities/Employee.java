@@ -9,7 +9,7 @@ public class Employee {
     private String CPF;
     private String hire_date;
     private double salary;
-    private int registration;
+    private int registration = 0;
     private Dependents dependents;
     private Role role;
     private String department;
@@ -63,7 +63,7 @@ public class Employee {
     }
 
     public void setRegistration(int registration) {
-        this.registration = registration;
+        this.registration += registration ;
     }
 
     public Dependents getDependents() {
