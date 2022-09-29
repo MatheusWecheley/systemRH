@@ -23,12 +23,14 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
     Role role;
     Dependents dependents;
     List<Employee> employeeList = new ArrayList<>();
-    List<Dependents> dependentsList = new ArrayList<>();
+
 
     @Override
     public void createEmployee(int id) {
 
         String[] choises = {"management", "agency", "P&D"};
+        List<Dependents> dependentsList = new ArrayList<>();
+
 
         firstName = JOptionPane.showInputDialog("Enter first Name the Employee's: ");
         lastName = JOptionPane.showInputDialog("Enter last name the Employee's: ");
@@ -48,6 +50,7 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
 
         Employee employee = new Employee();
         ICreateDependents createDependents = new CreateDependencyImplementation();
+
 
         employee.setFirstName(firstName);
         employee.setLastName(lastName);
@@ -76,7 +79,7 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
             if(response == 0 ) {
                 Dependents result = createDependents.createDependency(dependentsList);
                 if(result != null) {
-                    dependentsList.add(result);
+                    employee.getDependentsList().add(result);
                 }
             } else if(response == 1) {
                 break;
@@ -94,9 +97,5 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
 
     public List<Employee> getEmployeeList() {
         return employeeList;
-    }
-
-    public List<Dependents> getDependentsList() {
-        return dependentsList;
     }
 }

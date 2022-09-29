@@ -9,5 +9,5 @@ public interface ICreateEmployee {
     void createEmployee(int id);
     Integer verifyID(List<Employee> employeeList, int id);
     List<Employee> getEmployeeList();
-    List<Dependents> getDependentsList();
+
 }

@@ -33,11 +33,11 @@ public class Program {
                 id++;
                 addEmployee.createEmployee(id);
             } else if(result == 1) {
-                Integer verifyId = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the Employee ID:"));
+                Integer verifyId = Integer.parseInt(JOptionPane.showInputDialog(null
+                        ,"Enter the Employee ID:"));
                 List<Employee> employeeList = addEmployee.getEmployeeList();
-                List<Dependents> dependentsList = addEmployee.getDependentsList();
                 Integer data = addEmployee.verifyID(employeeList, verifyId);
-                payroll.payRoll(data, employeeList, dependentsList);
+                payroll.payRoll(data, employeeList);
             }
             else {
                 break;

@@ -16,16 +16,15 @@ public class CreatePayRoll implements IPayroll {
     String company;
     static Taxes taxes;
 
-    public void payRoll(Integer verifyId, List<Employee> list, List<Dependents> dependentsList) {
+    public void payRoll(Integer verifyId, List<Employee> list) {
 
         if(verifyId == null) {
             JOptionPane.showMessageDialog(null, "Not possible calculate employee salary!");
         } else {
-            int size = dependentsList.size();
+            int size = list.get(verifyId).getDependentsList().size();
             calculateValue(verifyId, list, size);
         }
     }
-
     private static void calculateValue(int verifyId, List<Employee> list, int size) {
 
         Employee employee = list.get(verifyId);
@@ -43,11 +42,10 @@ public class CreatePayRoll implements IPayroll {
 
         } else {
             double oldSalary = employee.getSalary();
-            double newSalary = ( oldSalary * Taxes.INPS.getValues())
-                    + ( oldSalary * Taxes.INSS.getValues())
-                    + ( oldSalary * Taxes.SO.getValues())
-                    + (105.99 * size)
-                    + oldSalary;
+            double newSalary = oldSalary - ( oldSalary * Taxes.INPS.getValues())
+                    - ( oldSalary * Taxes.INSS.getValues())
+                    - ( oldSalary * Taxes.SO.getValues())
+                    + (105.99 * size);
             employee.setSalary(newSalary);
             JOptionPane.showMessageDialog(null, employee.getSalary());
         }

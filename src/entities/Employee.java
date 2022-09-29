@@ -3,6 +3,9 @@ package entities;
 
 import entities.controllers.enums.Role;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Employee {
     private String firstName;
     private String lastName;
@@ -13,6 +16,7 @@ public class Employee {
     private Dependents dependents;
     private Role role;
     private String department;
+    private List<Dependents> dependentsList = new ArrayList<>();
 
     public String getDepartment() {
         return department;
@@ -80,6 +84,10 @@ public class Employee {
 
     public void setCargo(Role role) {
         this.role = role;
+    }
+
+    public List<Dependents> getDependentsList() {
+        return dependentsList;
     }
 
     public String toString() {
