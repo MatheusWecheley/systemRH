@@ -34,24 +34,23 @@ public class CreateDependencyImplementation implements ICreateDependents {
                 if(Objects.equals(dependents.getModelDependecy().toString(), "SON")); {
                     if(LocalDate.now().getYear() - date.getYear() < 18) {
                         dependents.setBirthDate(date);
+
                     }
                     else {
                         JOptionPane.showMessageDialog(null, "It is not possible to register a new dependent under the age of 18");
                         return null;
                     }
                 }
+                JOptionPane.showMessageDialog(null
+                        , "Create Dependents \n" +
+                                dependents.getName() +
+                                "\n" +
+                                dependents.getBirthDate() +
+                                "\n" +
+                                dependents.getModelDependecy());
             }catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
-
-            JOptionPane.showMessageDialog(null
-                    , "Create Dependents \n" +
-                            dependents.getName() +
-                            "\n" +
-                            dependents.getBirthDate() +
-                            "\n" +
-                            dependents.getModelDependecy());
-
             return dependents;
         } else {
             JOptionPane.showMessageDialog(

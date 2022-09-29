@@ -97,6 +97,7 @@ public class Employee {
                 + "Hire Date: " + hire_date + "\n"
                 + "Salary: " + salary + "\n"
                 + "Position: " + role + "\n"
+                + "Department: " + department + "\n"
                 + "ID Register: " + registration + "\n";
     }
 }

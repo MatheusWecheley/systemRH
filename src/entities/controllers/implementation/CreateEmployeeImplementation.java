@@ -1,5 +1,6 @@
 package entities.controllers.implementation;
 
+import entities.Department;
 import entities.Dependents;
 import entities.Employee;
 import entities.controllers.ICreateDependents;
@@ -12,51 +13,42 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 public class CreateEmployeeImplementation implements ICreateEmployee {
-    int id = 1;
     List<Employee> employeeList = new ArrayList<>();
 
     @Override
     public void createEmployee(int id) throws Exception {
-        int response = 0;
-        String[] choises = {"management", "agency", "P&D"};
-        String hire_date;
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         Employee employee = new Employee();
 
-
         try {
-            employee.setFirstName(JOptionPane.showInputDialog("Enter first Name the Employee's: "));
-            employee.setLastName(JOptionPane.showInputDialog("Enter last name the Employee's: "));
-            hire_date = JOptionPane.showInputDialog("Enter hire date the Employee: ");
-            LocalDate date = LocalDate.parse(hire_date, fmt);
-            employee.setHire_date(date);
-            employee.setCPF(JOptionPane.showInputDialog("Enter CPF the Employee's: "));
-            employee.setSalary(Double.parseDouble(JOptionPane.showInputDialog("Enter salary the Employee's")));
-            employee.setCargo(Role.valueOf(JOptionPane.showInputDialog("Which is the employee's job?").toUpperCase()));
             employee.setRegistration(id);
-
-            int validate = (JOptionPane.showOptionDialog(
-                    null
-                    , "Choose the departament:"
-                    , "Options"
-                    , JOptionPane.YES_NO_CANCEL_OPTION
-                    , JOptionPane.QUESTION_MESSAGE
-                    , null
-                    , choises
-                    , null));
-
+            questionsEmployee(employee);
             employeeList.add(employee);
             JOptionPane.showMessageDialog(null,employee);
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error create new Employee: \n" + e);
             return;
         }
+        addDependents(employee);
+    }
 
+    public Integer verifyID(List<Employee> list, int id) {
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getRegistration() == id) {
+                return i;
+            }
+        }
+        return null;
+    }
 
+    private void addDependents(Employee employee) throws Exception {
+        int response = 0;
         while (response == 0 ) {
             response = JOptionPane.showConfirmDialog(
                     null
@@ -80,13 +72,37 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
         }
     }
 
-    public Integer verifyID(List<Employee> list, int id) {
-        for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).getRegistration() == id) {
-                return i;
-            }
+    private void questionsEmployee(Employee employee) {
+        String[] choises = {"management", "agency", "P&D"};
+        String hire_date;
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        Department department = new Department();
+
+
+        employee.setFirstName(JOptionPane.showInputDialog("Enter first Name the Employee's: "));
+        employee.setLastName(JOptionPane.showInputDialog("Enter last name the Employee's: "));
+        hire_date = JOptionPane.showInputDialog("Enter hire date the Employee: ");
+        LocalDate date = LocalDate.parse(hire_date, fmt);
+        employee.setHire_date(date);
+        employee.setCPF(JOptionPane.showInputDialog("Enter CPF the Employee's: "));
+        employee.setSalary(Double.parseDouble(JOptionPane.showInputDialog("Enter salary the Employee's")));
+        employee.setCargo(Role.valueOf(JOptionPane.showInputDialog("Which is the employee's job?\n" + Arrays.toString(Role.values())).toUpperCase()));
+        int validate = (JOptionPane.showOptionDialog(
+                null
+                , "Choose the departament:"
+                , "Options"
+                , JOptionPane.YES_NO_CANCEL_OPTION
+                , JOptionPane.QUESTION_MESSAGE
+                , null
+                , choises
+                , null));
+        if(validate == 0) {
+            employee.setDepartment(department.getManagement());
+        } else if(validate == 1) {
+            employee.setDepartment(department.getAgency());
+        } else {
+            employee.setDepartment(department.getSearch());
         }
-        return null;
     }
 
     public List<Employee> getEmployeeList() {

@@ -17,7 +17,6 @@ public class Program {
         IPayroll payroll = new CreatePayRoll();
         int id = 0;
 
-
         while (operation == 0) {
 
             int result = JOptionPane.showOptionDialog(
@@ -33,6 +32,7 @@ public class Program {
             if (result == 0) {
                 id++;
                 addEmployee.createEmployee(id);
+
             } else if(result == 1) {
 
                 Integer verifyId = Integer.parseInt(JOptionPane.showInputDialog(null
@@ -40,8 +40,7 @@ public class Program {
                 List<Employee> employeeList = addEmployee.getEmployeeList();
                 Integer data = addEmployee.verifyID(employeeList, verifyId);
                 payroll.payRoll(data, employeeList);
-            }
-            else {
+            } else {
                 break;
             }
         }

@@ -38,7 +38,7 @@ public class CreatePayRoll implements IPayroll {
                     + (105.99 * size)
                     ;
             employee.setSalary(newSalary);
-            JOptionPane.showMessageDialog(null, employee.getSalary());
+            JOptionPane.showMessageDialog(null, "Total to payable: R$" +employee.getSalary());
 
         } else {
             double oldSalary = employee.getSalary();
@@ -47,7 +47,7 @@ public class CreatePayRoll implements IPayroll {
                     - ( oldSalary * Taxes.SO.getValues())
                     + (105.99 * size);
             employee.setSalary(newSalary);
-            JOptionPane.showMessageDialog(null, employee.getSalary());
+            JOptionPane.showMessageDialog(null,"Total to payable: R$" + employee.getSalary());
         }
     }
 
