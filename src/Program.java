@@ -10,7 +10,7 @@ import java.text.ParseException;
 import java.util.List;
 
 public class Program {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws Exception {
         int operation = 0;
         String[] choises = {"Create Employee", "Generate Payroll", "Cancel"};
         ICreateEmployee addEmployee = new CreateEmployeeImplementation();
@@ -34,6 +34,7 @@ public class Program {
                 id++;
                 addEmployee.createEmployee(id);
             } else if(result == 1) {
+
                 Integer verifyId = Integer.parseInt(JOptionPane.showInputDialog(null
                         ,"Enter the Employee ID:"));
                 List<Employee> employeeList = addEmployee.getEmployeeList();

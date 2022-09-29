@@ -47,7 +47,7 @@ public class Employee {
         this.CPF = CPF;
     }
 
-    public List<Employee> getHire_date() {
+    public LocalDate getHire_date() {
         return hire_date;
     }
 

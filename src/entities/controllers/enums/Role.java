@@ -12,5 +12,5 @@ public enum Role {
     ENGINEER,
     PLUMBER,
     COOKER,
-    TICKET_COLLECTOR
+    TICKET_COLLECTOR;
 }
