@@ -1,43 +1,44 @@
 package entities.controllers.implementation;
 
-import entities.Department;
 import entities.Dependents;
 import entities.Employee;
 import entities.controllers.ICreateDependents;
 import entities.controllers.ICreateEmployee;
 import entities.controllers.enums.Role;
-
 import javax.swing.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CreateEmployeeImplementation implements ICreateEmployee {
-
-    String firstName;
-    String lastName;
-    String CPF;
-    String hire_date;
-    double salary;
     int id = 1;
-    Role role;
-    Dependents dependents;
     List<Employee> employeeList = new ArrayList<>();
-
 
     @Override
     public void createEmployee(int id) {
-
+        int response = 0;
         String[] choises = {"management", "agency", "P&D"};
         List<Dependents> dependentsList = new ArrayList<>();
+        String hire_date;
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+        Employee employee = new Employee();
 
-        firstName = JOptionPane.showInputDialog("Enter first Name the Employee's: ");
-        lastName = JOptionPane.showInputDialog("Enter last name the Employee's: ");
-        CPF = JOptionPane.showInputDialog("Enter CPF the Employee's: ");
+        employee.setFirstName(JOptionPane.showInputDialog("Enter first Name the Employee's: "));
+        employee.setLastName(JOptionPane.showInputDialog("Enter last name the Employee's: "));
         hire_date = JOptionPane.showInputDialog("Enter hire date the Employee: ");
-        salary = Double.parseDouble(JOptionPane.showInputDialog("Enter salary the Employee's"));
-        role = Role.valueOf(JOptionPane.showInputDialog("Which is the employee's job?").toUpperCase());
+        LocalDate date = LocalDate.parse(hire_date, fmt);
+        employee.setHire_date(date);
+        employee.setCPF(JOptionPane.showInputDialog("Enter CPF the Employee's: "));
+        employee.setSalary(Double.parseDouble(JOptionPane.showInputDialog("Enter salary the Employee's")));
+        employee.setCargo(Role.valueOf(JOptionPane.showInputDialog("Which is the employee's job?").toUpperCase()));
+        employee.setRegistration(id);
+
         int validate = (JOptionPane.showOptionDialog(
                 null
                 , "Choose the departament:"
@@ -48,25 +49,10 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
                 , choises
                 , null));
 
-        Employee employee = new Employee();
-        ICreateDependents createDependents = new CreateDependencyImplementation();
-
-
-        employee.setFirstName(firstName);
-        employee.setLastName(lastName);
-        employee.setHire_date(hire_date);
-        employee.setCPF(CPF);
-        employee.setSalary(salary);
-        employee.setCargo(role);
-        employee.setRegistration(id);
-
         employeeList.add(employee);
         JOptionPane.showMessageDialog(null,employee);
 
-        int response = 0;
-
         while (response == 0 ) {
-
             response = JOptionPane.showConfirmDialog(
                     null
                     ,"Do you want add new dependency?"
@@ -77,7 +63,9 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
             );
 
             if(response == 0 ) {
-                Dependents result = createDependents.createDependency(dependentsList);
+                ICreateDependents createDependents = new CreateDependencyImplementation();
+                List<Employee> el = employeeList.get(id).getHire_date();
+                Dependents result = createDependents.createDependency(el, dependentsList, id);
                 if(result != null) {
                     employee.getDependentsList().add(result);
                 }

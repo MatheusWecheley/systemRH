@@ -22,10 +22,10 @@ public class CreatePayRoll implements IPayroll {
             JOptionPane.showMessageDialog(null, "Not possible calculate employee salary!");
         } else {
             int size = list.get(verifyId).getDependentsList().size();
-            calculateValue(verifyId, list, size);
+            calculateValueEmployee(verifyId, list, size);
         }
     }
-    private static void calculateValue(int verifyId, List<Employee> list, int size) {
+    private static void calculateValueEmployee(int verifyId, List<Employee> list, int size) {
 
         Employee employee = list.get(verifyId);
 

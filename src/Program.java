@@ -6,10 +6,11 @@ import entities.controllers.implementation.CreateEmployeeImplementation;
 import entities.controllers.implementation.CreatePayRoll;
 
 import javax.swing.*;
+import java.text.ParseException;
 import java.util.List;
 
 public class Program {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         int operation = 0;
         String[] choises = {"Create Employee", "Generate Payroll", "Cancel"};
         ICreateEmployee addEmployee = new CreateEmployeeImplementation();

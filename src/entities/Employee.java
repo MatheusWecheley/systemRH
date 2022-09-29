@@ -3,6 +3,7 @@ package entities;
 
 import entities.controllers.enums.Role;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String CPF;
-    private String hire_date;
+    private LocalDate hire_date;
     private double salary;
     private int registration = 0;
     private Dependents dependents;
@@ -46,11 +47,11 @@ public class Employee {
         this.CPF = CPF;
     }
 
-    public String getHire_date() {
+    public List<Employee> getHire_date() {
         return hire_date;
     }
 
-    public void setHire_date(String hire_date) {
+    public void setHire_date(LocalDate hire_date) {
         this.hire_date = hire_date;
     }
 
