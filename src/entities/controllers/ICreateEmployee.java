@@ -1,12 +1,13 @@
 package entities.controllers;
 
+import entities.Dependents;
 import entities.Employee;
 
 import java.util.List;
 
 public interface ICreateEmployee {
-    void createEmployee();
+    void createEmployee(int id);
     Integer verifyID(List<Employee> employeeList, int id);
-
     List<Employee> getEmployeeList();
+    List<Dependents> getDependentsList();
 }

@@ -1,9 +1,9 @@
 package entities.controllers;
 
-import entities.controllers.enums.Dependecy;
+import entities.Dependents;
 
-import java.util.Date;
+import java.util.List;
 
 public interface ICreateDependents {
-    void createDependency();
+    Dependents createDependency(List<Dependents> dependentsList);
 }

@@ -1,3 +1,4 @@
+import entities.Dependents;
 import entities.Employee;
 import entities.controllers.ICreateEmployee;
 import entities.controllers.IPayroll;
@@ -29,11 +30,14 @@ public class Program {
                     , "Create Employee");
 
             if (result == 0) {
-                addEmployee.createEmployee();
+                id++;
+                addEmployee.createEmployee(id);
             } else if(result == 1) {
-                int verifyId = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the Employee ID:"));
-                List<Employee> s = addEmployee.getEmployeeList();
-                JOptionPane.showMessageDialog(null,s);
+                Integer verifyId = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the Employee ID:"));
+                List<Employee> employeeList = addEmployee.getEmployeeList();
+                List<Dependents> dependentsList = addEmployee.getDependentsList();
+                Integer data = addEmployee.verifyID(employeeList, verifyId);
+                payroll.payRoll(data, employeeList, dependentsList);
             }
             else {
                 break;

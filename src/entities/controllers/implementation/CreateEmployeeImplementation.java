@@ -21,11 +21,12 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
     double salary;
     int id = 1;
     Role role;
-    Department department;
+    Dependents dependents;
     List<Employee> employeeList = new ArrayList<>();
+    List<Dependents> dependentsList = new ArrayList<>();
 
     @Override
-    public void createEmployee() {
+    public void createEmployee(int id) {
 
         String[] choises = {"management", "agency", "P&D"};
 
@@ -62,6 +63,7 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
         int response = 0;
 
         while (response == 0 ) {
+
             response = JOptionPane.showConfirmDialog(
                     null
                     ,"Do you want add new dependency?"
@@ -70,8 +72,12 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
                     ,JOptionPane.QUESTION_MESSAGE
                     , null
             );
+
             if(response == 0 ) {
-                createDependents.createDependency();
+                Dependents result = createDependents.createDependency(dependentsList);
+                if(result != null) {
+                    dependentsList.add(result);
+                }
             } else if(response == 1) {
                 break;
             }
@@ -88,5 +94,9 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
 
     public List<Employee> getEmployeeList() {
         return employeeList;
+    }
+
+    public List<Dependents> getDependentsList() {
+        return dependentsList;
     }
 }
