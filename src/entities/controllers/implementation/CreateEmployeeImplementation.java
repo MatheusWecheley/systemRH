@@ -28,10 +28,17 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
             employeeList.add(employee);
             JOptionPane.showMessageDialog(null,employee);
 
-        } catch (DateTimeException | IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(null,
-                    "Error create new Employee: \n"
-                            + e.getLocalizedMessage());
+        } catch (DateTimeException e) {
+            JOptionPane.showMessageDialog(null
+                    , "Date Format invalid!"
+                    , "Date error"
+                    , JOptionPane.ERROR_MESSAGE);
+            return;
+        } catch (IllegalArgumentException ie) {
+            JOptionPane.showMessageDialog(null
+                    ,"Dependent invalid!"
+                    , "Error Dependents"
+                    , JOptionPane.ERROR_MESSAGE);
             return;
         }
         addDependents(employee);
@@ -85,7 +92,11 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
         employee.setHire_date(date);
         employee.setCPF(JOptionPane.showInputDialog("Enter CPF the Employee's: "));
         employee.setSalary(Double.parseDouble(JOptionPane.showInputDialog("Enter salary the Employee's")));
-        employee.setCargo(Role.valueOf(JOptionPane.showInputDialog("Which is the employee's job?\n" + Arrays.toString(Role.values())).toUpperCase()));
+        employee.setCargo(Role.valueOf(JOptionPane.showInputDialog(
+                "Which is the employee's job?\n"
+                        + Arrays.toString(
+                                Role.values()))
+                                .toUpperCase()));
         int validate = (JOptionPane.showOptionDialog(
                 null
                 , "Choose the departament:"

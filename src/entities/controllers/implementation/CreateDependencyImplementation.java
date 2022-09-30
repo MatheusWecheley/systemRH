@@ -49,10 +49,17 @@ public class CreateDependencyImplementation implements ICreateDependents {
                                 dependents.getModelDependecy());
                 return dependents;
 
-            }catch (DateTimeException | IllegalArgumentException e) {
-                JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+            }catch (DateTimeException e) {
+                JOptionPane.showMessageDialog(null
+                        , "Date Format invalid"
+                        , "Date error"
+                        , JOptionPane.ERROR_MESSAGE);
+            }catch (IllegalArgumentException ie) {
+                JOptionPane.showMessageDialog(null
+                        ,"Dependent invalid!"
+                        , "Error Dependents"
+                        , JOptionPane.ERROR_MESSAGE);
             }
-            //JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
             return dependents;
 
         } else {
