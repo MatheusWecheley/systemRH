@@ -7,14 +7,11 @@ import entities.controllers.ICreateDependents;
 import entities.controllers.ICreateEmployee;
 import entities.controllers.enums.Role;
 import javax.swing.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class CreateEmployeeImplementation implements ICreateEmployee {
@@ -31,8 +28,10 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
             employeeList.add(employee);
             JOptionPane.showMessageDialog(null,employee);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error create new Employee: \n" + e);
+        } catch (DateTimeException | IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null,
+                    "Error create new Employee: \n"
+                            + e.getLocalizedMessage());
             return;
         }
         addDependents(employee);
