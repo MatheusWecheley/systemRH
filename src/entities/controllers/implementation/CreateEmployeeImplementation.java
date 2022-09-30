@@ -36,8 +36,8 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
             return;
         } catch (IllegalArgumentException ie) {
             JOptionPane.showMessageDialog(null
-                    ,"Dependent invalid!"
-                    , "Error Dependents"
+                    ,"Role invalid!"
+                    , "Error Role"
                     , JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -52,6 +52,8 @@ public class CreateEmployeeImplementation implements ICreateEmployee {
         }
         return null;
     }
+
+
 
     private void addDependents(Employee employee) throws Exception {
         int response = 0;

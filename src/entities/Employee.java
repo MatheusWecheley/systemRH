@@ -13,6 +13,7 @@ public class Employee {
     private String CPF;
     private LocalDate hire_date;
     private double salary;
+    private double salaryTotal;
     private int registration = 0;
     private Dependents dependents;
     private Role role;
@@ -61,6 +62,14 @@ public class Employee {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    public double getSalaryTotal() {
+        return salaryTotal;
+    }
+
+    public void setSalaryTotal(double salaryTotal) {
+        this.salaryTotal = salaryTotal;
     }
 
     public int getRegistration() {

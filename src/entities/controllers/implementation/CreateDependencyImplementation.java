@@ -1,7 +1,6 @@
 package entities.controllers.implementation;
 
 import entities.Dependents;
-import entities.Employee;
 import entities.controllers.ICreateDependents;
 import entities.controllers.enums.Dependecy;
 
@@ -9,9 +8,7 @@ import javax.swing.*;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CreateDependencyImplementation implements ICreateDependents {
     String name;
@@ -19,34 +16,11 @@ public class CreateDependencyImplementation implements ICreateDependents {
     Dependecy dependecy;
 
     public Dependents createDependency(List<Dependents> dependentsList) throws Exception {
-
         Dependents dependents = new Dependents();
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         if(dependentsList.size() <= 1) {
             try {
-                dependents.setName(JOptionPane.showInputDialog(null, "Enter dependent name: "));
-                birthDate = JOptionPane.showInputDialog(null, "Enter dependent birth date: ");
-                LocalDate date = LocalDate.parse(birthDate, fmt);
-                dependents.setModelDependecy(Dependecy.valueOf((JOptionPane.showInputDialog(null, "What is the degree of dependency?")).toUpperCase()));
-
-
-                if(dependents.getModelDependecy().toString() == "SON"){
-                    if (LocalDate.now().getYear() - date.getYear() < 18) {
-                        dependents.setBirthDate(date);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "It is not possible to register a new dependent under the age of 18");
-                        return null;
-                    }
-                }
-                dependents.setBirthDate(date);
-                JOptionPane.showMessageDialog(null
-                        , "Create Dependents \n" +
-                                dependents.getName() +
-                                "\n" +
-                                dependents.getBirthDate() +
-                                "\n" +
-                                dependents.getModelDependecy());
+                questionsDependents(dependents);
                 return dependents;
 
             }catch (DateTimeException e) {
@@ -54,14 +28,15 @@ public class CreateDependencyImplementation implements ICreateDependents {
                         , "Date Format invalid"
                         , "Date error"
                         , JOptionPane.ERROR_MESSAGE);
+                return null;
+
             }catch (IllegalArgumentException ie) {
                 JOptionPane.showMessageDialog(null
                         ,"Dependent invalid!"
                         , "Error Dependents"
                         , JOptionPane.ERROR_MESSAGE);
+                return null;
             }
-            return dependents;
-
         } else {
             JOptionPane.showMessageDialog(
                     null
@@ -70,5 +45,36 @@ public class CreateDependencyImplementation implements ICreateDependents {
                     JOptionPane.ERROR_MESSAGE);
             return null;
         }
+    }
+
+    private void questionsDependents(Dependents dependents) {
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        dependents.setName(JOptionPane.showInputDialog(null, "Enter dependent name: "));
+        birthDate = JOptionPane.showInputDialog(null, "Enter dependent birth date: ");
+        LocalDate date = LocalDate.parse(birthDate, fmt);
+        dependents.setModelDependecy(Dependecy.valueOf((JOptionPane.showInputDialog(null, "What is the degree of dependency?")).toUpperCase()));
+
+        if(dependents.getModelDependecy().toString() == "SON"){
+            if (LocalDate.now().getYear() - date.getYear() < 18) {
+                dependents.setBirthDate(date);
+            } else {
+                JOptionPane.showMessageDialog(null
+                        , "It is not possible to register a new dependent under the age of 18"
+                        , "Error create new Dependents"
+                        , JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        dependents.setBirthDate(date);
+        JOptionPane.showMessageDialog(null
+                , "Create Dependents \n" +
+                        dependents.getName() +
+                        "\n" +
+                        dependents.getBirthDate() +
+                        "\n" +
+                        dependents.getModelDependecy());
     }
 }
